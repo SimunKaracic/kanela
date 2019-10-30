@@ -18,6 +18,7 @@ package kanela.agent;
 
 import io.vavr.collection.List;
 import kanela.agent.api.instrumentation.listener.InstrumentationRegistryListener;
+import kanela.agent.api.instrumentation.registry.ClassRegistry;
 import kanela.agent.api.instrumentation.replacer.ClassReplacer;
 import kanela.agent.builder.KanelaFileTransformer;
 import kanela.agent.circuitbreaker.SystemThroughputCircuitBreaker;
@@ -71,6 +72,7 @@ final public class Kanela {
 
                   val configuration = KanelaConfiguration.from(instrumentationClassLoader);
                   Logger.configureLogger(configuration);
+                  ClassRegistry.attach(instrumentation);
 
                   if (isRuntimeAttach) configuration.runtimeAttach();
                   KanelaBanner.show(configuration);
